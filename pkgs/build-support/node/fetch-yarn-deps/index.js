@@ -22,7 +22,9 @@ const exec = async (...args) => {
 
 const downloadFileHttps = (fileName, url, expectedHash, hashType = 'sha1') => {
 	return new Promise((resolve, reject) => {
-		const get = (url, redirects = 0) => https.get(url, (res) => {
+		const token = process.env.YARN_NPM_AUTH_TOKEN
+		const headers = token ? { Authorization: `Bearer ${token}` } : {};
+		const get = (url, redirects = 0) => https.get(url, { headers }, (res) => {
 			if(redirects > 10) {
 				reject('Too many redirects!');
 				return;

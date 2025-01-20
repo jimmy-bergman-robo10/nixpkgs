@@ -131,6 +131,8 @@ in
             dontUnpack = src == null;
             dontInstall = true;
 
+            impureEnvVars = [ "YARN_NPM_AUTH_TOKEN" ];
+
             nativeBuildInputs = [
               prefetch-yarn-deps
               cacert
